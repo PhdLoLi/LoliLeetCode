@@ -7,12 +7,11 @@ using namespace std;
 class Solution {
 public:
     int titleToNumber(string s) {
-      int sum = 0, cur, length = s.length(), base = 1;
-      for(int i = length-1; i >= 0; i--)
+      int sum = 0, cur;
+      for(int i = 0; i < s.length(); i++)
       {
         cur = s[i] - 'A' + 1;
-        sum += base * cur;
-        base *= 26;
+        sum = sum*26 + cur;
       }
       return sum;
     }
