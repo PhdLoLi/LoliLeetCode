@@ -25,9 +25,9 @@ public:
           node = node -> left;
         }else
         {
-          node = st.top() -> right;
-          last = NULL;
-          while(!st.empty() && st.top() -> right == last)
+          if(st.top() -> right && st.top() -> right != last)
+           node = st.top() -> right;
+          else
           {
             last = st.top();
             st.pop();
