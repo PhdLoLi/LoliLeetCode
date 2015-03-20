@@ -16,7 +16,7 @@ public:
       vector<int> result; 
       stack<TreeNode *> st;
       TreeNode *node = root;
-      TreeNode *last = root;
+      TreeNode *last = NULL;
       while(!st.empty() || node)
       {
         if(node)
@@ -26,15 +26,12 @@ public:
         }else
         {
           node = st.top() -> right;
-          if(!node)
+          last = NULL;
+          while(!st.empty() && st.top() -> right == last)
           {
-            do
-            {
-              node = st.top();
-              st.pop();
-              result.push_back(node -> val);
-            }while(!st.empty() && st.top() -> right == node);
-            node = NULL;
+            last = st.top();
+            st.pop();
+            result.push_back(last -> val);
           }
         }
       }
