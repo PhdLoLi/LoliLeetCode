@@ -1,73 +1,38 @@
 #include <iostream>
-
-struct TreeLinkNode{
+struct TreeLinkNode {
   int val;
   TreeLinkNode *left, *right, *next;
   TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
 };
 class Solution {
-public:
-    void connect(TreeLinkNode *root) {
-      if(!root) return;
-      TreeLinkNode *parent, *p, *brother, *b;
-      root -> next = NULL;
-      parent = root;
-      do
-      {
-        p = parent;
-        brother = NULL;
+ public:
+  void connect(TreeLinkNode *root) {
+    TreeLinkNode *leftmost = root, *current;
 
-        while(p && !p -> left && !p->right)
-          p = p -> next;
+    while (leftmost) {
+      while (root && !root->left && !root->right)
+        root = root->next;
+      if (!root) return;
+      leftmost = root->left ? root->left : root->right;
 
-        if(!p) return;
-
-        if(p -> left)
-        {
-          brother = p -> left; 
-          b = brother;
-          if(p -> right)
-          {
-            b -> next = p -> right;
-            b = b -> next;
-          }
-        }else
-        {
-          brother = p -> right;
-          b = brother;
+      current = leftmost;
+      while (root) {
+        if (root->left) {
+          if (current != root->left) {
+            current->next = root->left;
+            current = current->next;
+          } 
+        } 
+        if (root->right) {
+          current->next = root->right;
+          current = current->next;
         }
-        
-        p = p -> next;
-
-        while(p)
-        {
-          while(p && !p -> left && !p->right)
-            p = p -> next;
-
-          if(!p) break;
-
-          if(p -> left)
-          {
-            b -> next = p -> left;
-            b = b -> next;
-            if(p -> right)
-            {
-              b -> next = p -> right;
-              b = b -> next;
-            }
-          }else
-          {
-            b -> next = p -> right;
-            b = b -> next;
-          }
-          p = p -> next;
-        }
-        b -> next = NULL;
-
-        parent = brother;
-
-      }while(parent);
+        root = root->next;
+      }
+      current->next = NULL;
+      root = leftmost;
     }
+  }
 };
 
 int main()
