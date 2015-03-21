@@ -3,21 +3,17 @@
 class Solution {
 public:
     int searchInsert(int A[], int n, int target) {
-      int left = 0, right = n - 1, mid = (n - 1) / 2; 
+      int left = 0, right = n - 1, mid;
       while (left <= right) {
-        if (left == right) {
-          return target <= A[left] ? left : left + 1; 
-        }
         mid = (left + right) / 2;
-        if (target == A[mid]) {
+        if (target == A[mid]) 
           return mid;
-        } else if (target < A[mid]) {
-          if (left == mid) 
-            return left;
+        else if (target < A[mid]) 
           right = mid - 1;
-        } else 
-         left = mid + 1; 
+        else  
+          left = mid + 1; 
       }
+      return left;
     }
 };
 
