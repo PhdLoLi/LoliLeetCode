@@ -17,6 +17,10 @@ class Solution {
 
   void tryNQueens(int i, vector<string> &chessboard) {
     int n = chessboard.size();
+    if (i == n) { 
+      result.push_back(chessboard);
+      return;
+    }
     for (int j = 0; j < n; j++) {
       bool placeQ = true;
       int k = 0;
@@ -36,16 +40,8 @@ class Solution {
       }
       if (placeQ) {
         chessboard[i][j] = 'Q';
-        if (i == n - 1) {
-//          vector<string> solution(chessboard); 
-//          result.push_back(solution);
-          result.push_back(chessboard);
-          chessboard[i][j] = '.';
-          break;
-        } else {
-          tryNQueens(i + 1, chessboard);
-          chessboard[i][j] = '.';
-        }
+        tryNQueens(i + 1, chessboard);
+        chessboard[i][j] = '.';
       }
     }
   }
