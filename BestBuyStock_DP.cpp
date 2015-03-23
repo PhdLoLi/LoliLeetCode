@@ -5,18 +5,14 @@ using namespace std;
 class Solution {
 public:
     int maxProfit(vector<int> &prices) {
-        
       if(prices.size()<2) return 0;
-      int i, pre_max = 0, all_max = 0, cur_max = 0, diff;
-
+      int i, all_max = 0, cur_max = 0, diff;
       for(i = 0; i < prices.size()-1 ; i ++)
       {
         diff = prices[i+1] - prices[i];
-        cur_max = max(diff, pre_max + diff);
-        pre_max = cur_max;
+        cur_max = max(diff, cur_max + diff);
         all_max = max(cur_max, all_max);
       }
-
       return all_max; 
     }
 };
