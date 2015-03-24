@@ -2,18 +2,15 @@
 class Solution {
 public:
     int singleNumber(int A[], int n) {
-      int single = 0, count[sizeof(int) * 8] = {0};
-      for (int i = 0; i < n; i++)
-      {
-        int tmp = A[i];
-        for (int j = 0; j < sizeof(int) * 8; j++) {
-          count[j] += tmp & 0x01;
-          tmp >>= 1;
-        } 
-      }
-      for (int i = sizeof(int) * 8 - 1; i >= 0; i--) {
-//        std::cout << count[i] % 3 << std::endl;
-        single = single << 1 | count[i] % 3;  
+      int single = 0;
+      for (int i = 0; i < sizeof(int) * 8; i++) {
+        int count = 0;
+        int mask = 1 << i;
+        for (int j = 0; j < n; j++) {
+          if (A[j] & mask)
+            count ++;  
+        }
+        single += (count % 3) << i;  
       } 
       return single;
     }
