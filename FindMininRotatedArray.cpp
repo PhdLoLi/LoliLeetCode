@@ -12,6 +12,23 @@ public:
     }
 };
 */
+/*iterative */
+class Solution {
+public:
+    int findMin(vector<int> &num) {
+        int l = 0, h = num.size() - 1;
+        if (num[l] < num[h]) return num[l];
+        while (l < h) {
+            int m = (l + h) / 2;
+            if (num[m] < num[h])
+                h = m;
+            else
+                l = m + 1;
+        }
+        return num[l];
+    }
+};
+/* recursive version
 class Solution {
 public:
     int findMin(vector<int> &num) {
@@ -26,4 +43,5 @@ public:
             return bsMin(num, mid + 1, high);
     }
 };
+*/
 int main() {}
