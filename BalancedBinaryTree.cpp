@@ -1,4 +1,6 @@
 #include <cstdlib>
+#include <algorithm>
+using std::max;
 struct TreeNode {
     int val;
     TreeNode *left;
