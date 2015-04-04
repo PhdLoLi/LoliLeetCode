@@ -1,6 +1,7 @@
 #include <vector>
 #include <iostream>
 using namespace std;
+/* V0
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int> > &matrix) {
@@ -44,6 +45,36 @@ public:
           break;
       }
       return result;  
+    }
+};
+*/
+/* 4.03 Rewrite */
+class Solution {
+public:
+    vector<int> spiralOrder(vector<vector<int> > &matrix) {
+        vector<int> res;
+        int m = matrix.size();
+        if (m == 0) return res;
+        int n = matrix[0].size();
+        for (int i = 0; i < min(m, n) / 2; i++) {
+            int endCol = n - 1 - i;
+            int endRow = m - 1 - i;
+            for (int j = i; j < endCol; j++)
+                res.push_back(matrix[i][j]);
+            for (int j = i; j < endRow; j++)
+                res.push_back(matrix[j][endCol]);
+            for (int j = endCol; j > i; j--)
+                res.push_back(matrix[endRow][j]);
+            for (int j = endRow; j > i; j--)
+                res.push_back(matrix[j][i]);
+        }
+        if (m < n && m % 2 == 1) 
+            for (int j = m/2; j <= n - 1 - m/2; j++)
+                res.push_back(matrix[m/2][j]);
+        if (n <= m && n % 2 == 1)
+            for (int j = n/2; j <= m - 1 - n/2; j++)
+                res.push_back(matrix[j][n/2]);
+        return res;  
     }
 };
 int main(int argc, char *argv[])
