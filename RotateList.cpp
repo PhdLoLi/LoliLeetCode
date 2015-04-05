@@ -18,8 +18,8 @@ public:
         }
         //if (k > step && k % (step + 1) == 0) return head;
         //if (k > step) {
-            for (int i = 0; i < step - k % (step + 1); i++)
-                slow = slow->next;            
+        for (int i = 0; i < step - k % (step + 1); i++)
+            slow = slow->next;            
         //}
         fast->next = head;
         head = slow->next;
