@@ -1,4 +1,8 @@
 #include <iostream>
+#include <queue>
+#include <stack>
+using std::queue;
+using std::stack;
 struct TreeNode {
     int val;
     TreeNode *left;
@@ -137,7 +141,7 @@ public:
             TreeNode *r_node = v_r.front();
             v_l.pop();
             v_r.pop();
-            if (!l_node && r_node || l_node && !r_node) return false;
+            if ((!l_node && r_node) || (l_node && !r_node)) return false;
             if (!l_node && !r_node) continue;
             if (l_node->val != r_node->val) return false;
             v_l.push(l_node->left);

@@ -25,8 +25,7 @@ public:
         uint32_t ret = 0;
         int counter = 0;
         while (n != 0) {
-            int tmp = n & 0x01;
-            ret = (ret << 1) | tmp;
+            ret = (ret << 1) | n & 0x01;
             n >>= 1;
             counter++;
         }
