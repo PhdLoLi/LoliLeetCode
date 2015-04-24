@@ -36,7 +36,7 @@ public:
             if (tar < A[mid]) high = mid - 1;
             else low = mid + 1;
         }
-        std::cout << "low " << low << std::endl;
+       // std::cout << "low " << low << std::endl;
         if (A[low] != target) return ret;
         ret[0] = low;
         high = n - 1;
