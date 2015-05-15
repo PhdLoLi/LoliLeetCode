@@ -52,7 +52,7 @@ public:
 };
 */
 // Bit map Others
-static inline bool checkDup(unsigned *m, char x) {
+bool checkDup(unsigned *m, char x) {
     if (x == '.')
         return false;
     if (*m & 1<< (x - '0'))
@@ -62,8 +62,8 @@ static inline bool checkDup(unsigned *m, char x) {
 }
 
 bool isValidSudoku(char board[9][9]) {
-    short cols[] = {0,0,0,0,0,0,0,0,0};
-    short blocks[]= {0,0,0,0,0,0,0,0,0};
+    unsigned cols[] = {0,0,0,0,0,0,0,0,0};
+    unsigned blocks[]= {0,0,0,0,0,0,0,0,0};
     for(unsigned i = 0; i < 9; ++i) {
         for(unsigned j = 0, r = 0; j < 9; ++j)
             if (checkDup(&r, board[i][j]) /*check row*/ || checkDup(cols+j, board[i][j]) /*check col */
