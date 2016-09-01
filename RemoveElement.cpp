@@ -1,3 +1,5 @@
+#include <vector>
+using namespace std;
 class Solution {
 public:
     int removeElement(int A[], int n, int elem) {
@@ -26,6 +28,20 @@ public:
             }
         }
         return index;
+    }
+
+    int removeElementStartEnd(vector<int>& nums, int val) {
+        int start = 0;
+        int end = nums.size() - 1;
+        while (start <= end) {
+            if (nums[start] == val) {
+                int tmp = nums[end];
+                nums[end] = nums[start];
+                nums[start] = tmp;
+                end--;
+            } else start++;
+        }
+        return end + 1;
     }
 };
 int main() {}
