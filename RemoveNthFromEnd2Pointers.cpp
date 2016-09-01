@@ -24,6 +24,23 @@ public:
         slow->next = slow->next->next;
         return head;
     }
+
+    // a little faster don't know why
+    ListNode* removeNthFromEndNew(ListNode* head, int n) {
+        if (!head) return head;
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+        ListNode* fast = dummy;
+        head = dummy;
+        for (int i = 0; i < n; i++)
+            fast = fast->next;
+        while (fast->next) {
+            fast = fast->next;
+            head = head->next;
+        }
+        head->next = head->next->next;
+        return dummy->next;
+    }
 };
 
 /* With N Judgement
