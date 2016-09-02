@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
 /*
 class Solution {
 public:
@@ -31,6 +34,40 @@ public:
             A[p--] = A[i] > B[j] ? A[i--] : B[j--];
         while (j >= 0) 
             A[p--] = B[j--];
+    }
+
+    void mergeI(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int i = 0, j = 0;
+        
+        while (i < m && j < n) {
+            if (nums1[i + j] > nums2[j]) {
+                for (int k = m + j; k > i + j; k--) 
+                    nums1[k] = nums1[k - 1];
+                nums1[i + j] = nums2[j];
+                j++;
+            } else i++; 
+        }
+        
+        for (; j < n; j++)
+            nums1[m + j] = nums2[j];
+    }
+    
+    void mergeII(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        int p = m + n - 1, i = m - 1, j = n - 1;
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] > nums2[j]) {
+                nums1[p] = nums1[i];
+                i--;
+            } else {
+                nums1[p] = nums2[j];
+                j--;
+            }
+            p--;
+        }
+        for (; j >= 0; j--) {
+            nums1[p] = nums2[j];
+            p--;
+        }
     }
 };
 
