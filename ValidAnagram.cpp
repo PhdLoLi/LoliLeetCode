@@ -4,6 +4,7 @@ using namespace std;
 
 class Solution {
 public:
+    // hash_map for unicode all
     bool isAnagram(string s, string t) {
         if (s.size() != t.size()) return false;
         unordered_map<char, int> hash_table;
@@ -23,6 +24,27 @@ public:
             if (it->second != 0) return false;
         }
         return true;
+    }
+
+    // fixed 26 vector
+    bool isAnagramII(string s, string t) {
+        if (s.size() != t.size()) return false;
+        int m[26] = {0};
+        for (int i = 0; i < s.size(); ++i) ++m[s[i] - 'a'];
+        for (int i = 0; i < t.size(); ++i) {
+            if (--m[t[i] - 'a'] < 0) return false;
+        }
+        return true;
+    }
+
+    // sort version using stl of string and algorithm
+    bool isAnagramIII(string s, string t) {
+        if (s.size() != t.size()) return false;
+        sort(s.begin(), s.end());
+        sort(t.begin(), t.end());
+        if (s == t)
+            return true;
+        else return false;
     }
 };
 int main() {
